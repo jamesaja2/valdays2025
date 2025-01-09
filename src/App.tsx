@@ -22,7 +22,7 @@ function App() {
           <img 
             src="/logo.gif" 
             alt="Logo Animation" 
-            className="w-full max-w-[1440px] h-auto mx-auto object-contain"
+            className="w-full max-w-[700px] h-auto mx-auto object-contain"
           />
         </div>
       </div>

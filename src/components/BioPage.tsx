@@ -13,14 +13,55 @@ interface LinkItem {
   url: string;
 }
 
+// Links data organized by grade and class
+const classLinks: Record<Grade, Record<string, LinkItem[]>> = {
+  X: {
+    'A': [
+      { title: "WALI KELAS", url: "https://wa.me/6281234567890" },
+      { title: "BK", url: "https://wa.me/6281234567891" },
+      { title: "PENGAJAR 1", url: "https://wa.me/6281234567892" },
+      { title: "PENGAJAR 2", url: "https://wa.me/6281234567893" }
+    ],
+    'B': [
+      { title: "WALI KELAS", url: "https://wa.me/6281234567894" },
+      { title: "BK", url: "https://wa.me/6281234567895" },
+      { title: "PENGAJAR 1", url: "https://wa.me/6281234567896" },
+      { title: "PENGAJAR 2", url: "https://wa.me/6281234567897" }
+    ],
+    // Add entries for C through L with different links
+  },
+  XI: {
+    'A1': [
+      { title: "WALI KELAS", url: "https://wa.me/6282234567890" },
+      { title: "BK", url: "https://wa.me/6282234567891" },
+      { title: "PENGAJAR 1", url: "https://wa.me/6282234567892" },
+      { title: "PENGAJAR 2", url: "https://wa.me/6282234567893" }
+    ],
+    // Add entries for A2 through F with different links
+  },
+  XII: {
+    'MIPA1': [
+      { title: "WALI KELAS", url: "https://wa.me/6283234567890" },
+      { title: "BK", url: "https://wa.me/6283234567891" },
+      { title: "PENGAJAR 1", url: "https://wa.me/6283234567892" },
+      { title: "PENGAJAR 2", url: "https://wa.me/6283234567893" }
+    ],
+    // Add entries for MIPA2 through MIPS3 with different links
+  }
+};
+
+// Fallback links if class-specific links are not found
 const defaultLinks: LinkItem[] = [
-  { title: "WALI KELAS", url: "#" },
-  { title: "BK", url: "#" },
-  { title: "PENGAJAR 1", url: "#" },
-  { title: "PENGAJAR 2", url: "#" }
+  { title: "WALI KELAS", url: "https://wa.me/6281234567890" },
+  { title: "BK", url: "https://wa.me/6281234567891" },
+  { title: "PENGAJAR 1", url: "https://wa.me/6281234567892" },
+  { title: "PENGAJAR 2", url: "https://wa.me/6281234567893" }
 ];
 
 const BioPage: React.FC<Props> = ({ grade, className, onBack }) => {
+  // Get class-specific links or fall back to default links
+  const links = classLinks[grade]?.[className] || defaultLinks;
+
   return (
     <div className="text-center">
       <button
@@ -35,7 +76,7 @@ const BioPage: React.FC<Props> = ({ grade, className, onBack }) => {
       </h2>
 
       <div className="space-y-4 max-w-md mx-auto">
-        {defaultLinks.map((link, index) => (
+        {links.map((link, index) => (
           <a
             key={index}
             href={link.url}
